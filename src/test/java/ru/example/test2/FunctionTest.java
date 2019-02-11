@@ -18,13 +18,13 @@ public class FunctionTest {
     public void whenWrongDataThenMinusOne() {
         Function function = new Function();
         assertThat(function.calculate(1, 2), is(-1));
-        assertThat(function.calculate(-1, -2), is(-1));
+        assertThat(function.calculate(-2, -1), is(-1));
     }
 
     @Test
     public void whenCalculateThenSuccess() {
         Function function = new Function();
         assertThat(function.calculate(5, 4), is(5));
-        System.out.println(function.calculate(5, 4));
+        assertThat(function.calculate(6, 6), is(1));
     }
 }

@@ -1,8 +1,6 @@
 package ru.example.test3;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -15,21 +13,21 @@ public class CountWords {
     public CountWords() {
     }
 
-    public Map<String, Integer> count(String string) {
-        string = string.replaceAll("[^a-zA-Z0-9 ]","");
-        String[] words = string.toLowerCase().split(" ");
+    public List<String> count(String string) {
+        String[] words = string.toLowerCase().split("[,;:.!?\\s]+");
         Map<String, Integer> result = new HashMap<>();
         for (String word : words) {
             if (!result.containsKey(word)) {
                 result.put(word, 1);
             } else {
-                int temp = result.get(word);
-                result.put(word, ++temp);
+                result.put(word, result.get(word) + 1);
             }
         }
-        return result.entrySet()
+        List sortedList = new ArrayList<>(result.entrySet()
                 .stream()
                 .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new)).keySet());
+        sortedList.forEach(System.out::println);
+        return sortedList;
     }
 }

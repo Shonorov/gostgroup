@@ -10,22 +10,10 @@ public class Function {
     }
 
     public int calculate(int m, int r) {
-        if (r > m) {
-            System.out.println("r more than m!");
-            return -1;
-        }
-        if (m < 0 || r < 0) {
-            System.out.println("Not natural numbers!");
-            return -1;
-        }
-        return factor(m)/(factor(r) * factor(m - r));
+        return m >= r ? fact(m)/(fact(r) * fact(m - r)) : -1;
     }
 
-    private int factor(int number) {
-        int result = 1;
-        for (int i = 1; i <= number; i++) {
-            result *= i;
-        }
-        return result;
+    private int fact(int number) {
+        return number <= 1 ? 1 : number * fact(number - 1) ;
     }
 }
